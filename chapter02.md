@@ -43,47 +43,6 @@ Zig — это современный системный язык програм
 - **Проверки на этапе компиляции**: Zig включает множество проверок на этапе компиляции, таких как проверка на неинициализированные переменные, что помогает обнаруживать ошибки до выполнения программы.
 - **Контроль безопасности памяти**: Язык включает в себя механизмы для предотвращения переполнения буфера и других распространенных проблем безопасности.
 
-### Примеры кода
-
-#### Пример функции с обработкой ошибок:
-
-```zig
-const std = @import("std");
-
-fn openFile(path: []const u8) !std.fs.File {
-    const file = try std.fs.cwd().openFile(path, .{});
-    return file;
-}
-
-pub fn main() void {
-    const path = "example.txt";
-    const file = openFile(path) catch |err| {
-        std.debug.print("Failed to open file: {}\n", .{err});
-        return;
-    };
-    std.debug.print("File opened successfully\n", .{});
-    file.close();
-}
-```
-
-#### Пример асинхронной функции:
-
-```zig
-const std = @import("std");
-
-const Task = struct {
-    data: i32,
-    async fn execute(self: *Task) void {
-        std.debug.print("Task data: {}\n", .{self.data});
-    }
-};
-
-pub fn main() void {
-    const task = Task{ .data = 42 };
-    const promise = task.execute();
-    const result = promise.await;
-}
-```
 
 ### Заключение
 
